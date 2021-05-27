@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login / Sign up</title>
+	<meta charset="UTF-8">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+	<script>
+	function deleteAllCookies() {
+	    var cookies = document.cookie.split(";");
+
+	    for (var i = 0; i < cookies.length; i++) {
+	        var cookie = cookies[i];
+	        var eqPos = cookie.indexOf("=");
+	        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+	        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+	    }
+	}
+	
+	</script>
+	<script>
+		function tryLogin(){
+			var xhttp = new XMLHttpRequest();
+			xhttp.open("GET", "login?loginUsername=" + document.loginForm.loginUsername.value + 
+					"&loginPassword=" + document.loginForm.loginPassword.value,
+					true);
+			
+			xhttp.onreadystatechange = function(){
+				
+				if(this.readyState == XMLHttpRequest.DONE){
+					if(this.responseText == "success"){
+						document.cookie="username=" + document.loginForm.loginUsername.value
+						window.location = "home.html";
+					}
+					else{
+						document.getElementById("validateSignin").innerHTML = this.responseText;
+					}
+				}
+				
+			}
+			xhttp.send();	
+			return false;
+		}
+	</script>
+	<script>
+		function trySignup(){
+			var checkPrint = document.getElementById("checkPrint");
+			checkPrint.value = checkPrint.checked;
+			var xhttp = new XMLHttpRequest();
+			xhttp.open("GET", "signup?signupEmail="+document.signupform.signupEmail.value + 
+					"&signupUsername=" + document.signupform.signupUsername.value + 
+					"&signupPassword=" + document.signupform.signupPassword.value +
+					"&signupConfirmPassword=" +document.signupform.signupConfirmPassword.value +
+					"&agreeBox=" + document.signupform.Print.value,
+					true);
+			
+			xhttp.onreadystatechange = function(){
+				
+				if(this.readyState == XMLHttpRequest.DONE){
+					
+					if(this.responseText == "success"){
+						document.cookie="username=" + document.signupform.signupUsername.value
+						window.location = "home.html";
+					}
+					else{
+						document.getElementById("validateSignup").innerHTML = this.responseText;
+					}
+				}
+				
+			}
+			xhttp.send();	
+			return false;
+		}
+	</script>
+  <script src="https://apis.google.com/js/api:client.js"></script>
+  <script>
+  var googleUser = {};
+  var startApp = function() {
+    gapi.load('auth2', function(){
+      // Retrieve the singleton for the GoogleAuth library and set up the client.
+      auth2 = gapi.auth2.init({
+        client_id: '108280730482-tba48jnfei3e0h9kanb9o24abgnhsqnq.apps.googleusercontent.com',
+        cookiepolicy: 'single_host_origin',
+        // Request scopes in addition to 'profile' and 'email'
+        //scope: 'additional_scope'
+      });
+      attachSignin(document.getElementById('customBtn'));
+    });
+  };
+
+  function attachSignin(element) {
+    console.log(element.id);
+    auth2.attachClickHandler(element, {},
+        function(googleUser) {
+          document.getElementById('name').innerText = "Signed in: " +
+              googleUser.getBasicProfile().getName();
+          
+          
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", "gglogin?loginUsername=" + googleUser.getBasicProfile().getName()+"&loginEmail=" + googleUser.getBasicProfile().getEmail());
+
+          xhr.send();
+          document.cookie="username=" + googleUser.getBasicProfile().getName()
+          window.location = "home.html";
+        }
+    , function(error) {
+          alert(JSON.stringify(error, undefined, 2));
+        });
+  }
+  </script>
+  <style type="text/css">
+    #customBtn {
+      display: inline-block;
+      width: 100%;
+      white-space: nowrap;
+    }
+    #customBtn:hover {
+      cursor: pointer;
+    }
+    span.buttonText {
+      display: inline-block;
+      vertical-align: middle;
+      padding-left: 42px;
+      padding-right: 42px;
+      font-weight: bold;
+      /* Use the Roboto font that is loaded in the <head> */
+      font-family: 'Roboto', sans-serif;
+    }
+  </style>
+
+	<style>
+		img.rounded-corners {
+  		border-radius: 35px;
+  		border: 0px;
+		}
+
+		button.search{background-color: #990000; color: white;}
+		#logo{
+		font-family: 'Lobster', cursive;
+		color: #990000;
+		font-size: 40px;
+		}
+		.borderless td, .borderless th {border: none;}
+        html{height:100%;}
+   		body{
+   			font-family: Helvetica;
+   			margin: 0;
+    		padding: 0;
+    		height:100%;
+    		color:gray;
+   		}
+	</style>
+</head>
+<body onload = "deleteAllCookies()">
+<br>
+	
+	<!-- HEADER-->
+	<header>
+	<div class="container">
+    	<div class="row">
+      		<div class="col-6">
+        	<!-- content for column 1 use class = "form-control" for it to stretch the size of the column -->
+        			<div id="logo">
+        				SalEats!
+        			</div>
+        	</div>
+        	
+        	<div class="col-6" align= "right"> 
+        	<!-- content for column 1 use class = "form-control" for it to stretch the size of the column -->
+        	<br>
+        		<a href="home.html" style="color:gray">Home &nbsp </a>
+        		<a href="login-sign-up.html" style="color:gray">Login / Sign Up</a>
+
+        	</div>
+        </div>
+   	</div>
+   	</header>
+   	<br>
+   	<hr>
+	<br>
+	<div class="container">
+    	<div class="row">
+    		<!-- Restaurant Name -->
+      		<div class="col-6">
+      		<h2>Login</h2>
+      		<form name ="loginForm" onSubmit="return tryLogin()">
+      			<div class="form-group">
+      				<label>Username</label>
+      				<input type="text" class="form-control" name="loginUsername">
+      				<label>Password</label>
+      				<input type="password" class="form-control" name="loginPassword">
+      				<br>
+      				<button type="Submit" class="btn-block form-controll btn search"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign in</button>
+      				<hr style="width:50%;margin-left:auto">
+
+      				<div id="gSignInWrapper" >
+    					<div id="customBtn" class="btn btn-primary form-control" data-redirecturi="home.html">
+      						<span class="buttonText"><i class="fa fa-google"></i> Sign in with Google</span>
+    					</div>
+  					</div>
+  					<div id="name"></div>
+  					<script>startApp();</script>
+
+				</div>
+      		</form>
+      		
+      		<div id="validateSignin">  </div>
+
+      		</div>
+
+      		<div class="col-6">
+      		
+      		<h2>Sign Up</h2>
+      		<form name ="signupform" onSubmit="return trySignup()">
+      			<div class="form-group">
+      			<label>Email</label>
+      			<input type="email" class="form-control" name="signupEmail">
+      			<label>Username</label>
+      			<input type="text" class="form-control" name="signupUsername">
+      			<label>Password</label>
+      			<input type="password" class="form-control" name="signupPassword">
+      			<label>Confirm Password</label>
+      			<input type="password" class="form-control" name="signupConfirmPassword">
+      			<br>
+      			
+      			<div class="form-check">
+      				<input type="checkbox" class="form-check-input form-controll btn-block" id="checkPrint" name="Print" value ="false">
+      				<label class="form-check-label form-controll" for="1" >I have read and agree to all terms and conditions of SalEats</label>
+      			</div>
+    			
+      			<button type="Submit" class="search btn-block form-controll btn "><i class="fa fa-user-plus" aria-hidden="true"></i> Create Account</button>
+      			</div>
+      		</form>
+      		<div id="validateSignup">  </div>
+      		</div>
+      	</div>
+      </div>
+</body>
+</html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<head>
+	<title> Favorites</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	
+	<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+	/* Dashed red border */
+	hr.new2 {
+  	border-top: 1px dashed gray;
+	}
+		img.rounded-corners {
+  		border-radius: 35px;
+  		border: 0px;
+		}
+
+		button.search{background-color: #990000; color: white;}
+		#logo{
+		font-family: 'Lobster', cursive;
+		color: #990000;
+		font-size: 40px;
+		}
+		.borderless td, .borderless th {border: none;}
+		
+		/* The Modal (background) */
+		.modal {
+  		display: none; /* Hidden by default */
+  		position: fixed; /* Stay in place */
+  		z-index: 1; /* Sit on top */
+  		padding-top: 100px; /* Location of the box */
+  		left: 0;
+  		top: 0;
+  		width: 100%; /* Full width */
+  		height: 100%;
+  		overflow: auto; /* Enable scroll if needed */
+  		background-color: rgb(0,0,0); /* Fallback color */
+  		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+		}
+		#map{
+            height: 500px;
+            width:100%;
+        }
+        html{height:100%;}
+   		body{
+   			font-family: Helvetica;
+   			margin: 0;
+    		padding: 0;
+    		height:100%;
+    		color:gray;
+   		}
+	/* Modal Content */
+		.modal-content {
+  			background-color: #fefefe;
+  			margin: auto;
+  			width: 80%;
+		}
+	</style>
+	
+	<script>
+		function trySearch(){
+			var xhttp = new XMLHttpRequest();
+			xhttp.open("POST", "search?restaurantname=" + document.searchform.restaurantname.value + 
+					"&choice=" + document.searchform.choice.value +
+					"&latitude=" + document.searchform.Latitude.value +
+					"&longitude=" +document.searchform.Longitude.value,
+					true);
+			
+			xhttp.onreadystatechange = function(){
+				
+				if(this.readyState == XMLHttpRequest.DONE){
+					if(this.responseText == "success"){
+						//document.cookie="username=" + document.loginForm.loginUsername.value
+						window.location = "search-results.html";
+					}
+					else{
+						document.getElementById("validateSearch").innerHTML = this.responseText;
+					}
+				}
+				
+			}
+			xhttp.send();	
+			return false;
+		}
+	
+	
+	</script>
+	
+	<script>
+		function getdetails(i){
+			function setCookie(cname, cvalue, exdays) {
+				  var d = new Date();
+				  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+				  var expires = "expires="+ d.toUTCString();
+				  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+				};
+				var rname = "name"+i;
+			setCookie("index", i, 1);
+
+			
+			window.location = "details.html";
+		}
+	</script>
+	
+	<script>
+	
+	function getCookie(cname) {
+		  var name = cname + "=";
+		  var decodedCookie = decodeURIComponent(document.cookie);
+		  var ca = decodedCookie.split(';');
+		  for(var i = 0; i <ca.length; i++) {
+		    var c = ca[i];
+		    while (c.charAt(0) == ' ') {
+		      c = c.substring(1);
+		    }
+		    if (c.indexOf(name) == 0) {
+		      return c.substring(name.length, c.length);
+		    }
+		  }
+		  return "";
+		}
+		function logincheck(){
+			
+			var user=getCookie("username")
+			if(user == ""){
+				document.getElementById("Menu").innerHTML = '<br><a href="home.html" style="color:gray">Home &nbsp </a><a href="login-sign-up.html" style="color:gray">Login / Sign Up</a>';
+
+			}else{
+				document.getElementById("Menu").innerHTML = '<br><a href="home.html" style="color:gray">Home &nbsp </a>' +
+															'<a href="favorites.html" style="color:gray">Favorites &nbsp</a>' +
+															'<a href="home.html" style="color:gray" onclick="deleteAllCookies()">Logout &nbsp</a>';
+			}
+			
+			    
+		}
+	</script>
+	
+	<script>
+	function deleteAllCookies() {
+	    var cookies = document.cookie.split(";");
+
+	    for (var i = 0; i < cookies.length; i++) {
+	        var cookie = cookies[i];
+	        var eqPos = cookie.indexOf("=");
+	        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+	        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+	    }
+	}
+	
+	</script>
+	<script>
+	function getresult(){
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("GET", "search",true);
+		
+		xhttp.onreadystatechange = function(){
+			
+			if(this.readyState == XMLHttpRequest.DONE){
+				if(this.responseText == "success"){
+					//document.cookie="username=" + document.loginForm.loginUsername.value
+					window.location = "search-results.html";
+				}
+				else{
+					document.getElementById("searchresult").innerHTML = this.responseText;
+				}
+			}
+			
+		}
+		xhttp.send();	
+		return false;
+	}
+	
+	
+	</script>
+	
+	<script>
+	function getfavorites(){
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("GET", "favoritesservlet?username=" +getCookie("username"),true);
+		
+		xhttp.onreadystatechange = function(){
+			
+			if(this.readyState == XMLHttpRequest.DONE){
+				if(this.responseText == "success"){
+					//document.cookie="username=" + document.loginForm.loginUsername.value
+					
+					
+					
+					window.location = "search-results.html";
+				}
+				else{
+					document.getElementById("ame").innerHTML = getCookie("username") +  "'s Favorites: ";
+					document.getElementById("favoriteresult").innerHTML = this.responseText;
+				}
+			}
+			
+		}
+		xhttp.send();	
+		return false;
+	}
+	
+	
+	
+	</script>
+	
+	
+	<script>
+	
+ 	function atoz(){
+ 		var xhttp = new XMLHttpRequest();
+		xhttp.open("POST", "favoritesservlet?command=atoz&username=" +getCookie("username"),true);
+		
+		xhttp.onreadystatechange = function(){
+			
+			if(this.readyState == XMLHttpRequest.DONE){
+				if(this.responseText == "success"){
+					//document.cookie="username=" + document.loginForm.loginUsername.value
+					
+					
+					
+					window.location = "search-results.html";
+				}
+				else{
+					document.getElementById("ame").innerHTML = getCookie("username") +  "'s Favorites: ";
+					document.getElementById("favoriteresult").innerHTML = this.responseText;
+				}
+			}
+			
+		}
+		xhttp.send();	
+		return false;
+ 	}
+	function ztoa(){
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("POST", "favoritesservlet?command=ztoa&username=" +getCookie("username"),true);
+		
+		xhttp.onreadystatechange = function(){
+			
+			if(this.readyState == XMLHttpRequest.DONE){
+				if(this.responseText == "success"){
+					//document.cookie="username=" + document.loginForm.loginUsername.value
+					
+					
+					
+					window.location = "search-results.html";
+				}
+				else{
+					document.getElementById("ame").innerHTML = getCookie("username") +  "'s Favorites: ";
+					document.getElementById("favoriteresult").innerHTML = this.responseText;
+				}
+			}
+			
+		}
+		xhttp.send();	
+		return false;
+	
+	}
+	function toprank(){
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("POST", "favoritesservlet?command=toprank&username=" +getCookie("username"),true);
+		
+		xhttp.onreadystatechange = function(){
+			
+			if(this.readyState == XMLHttpRequest.DONE){
+				if(this.responseText == "success"){
+					//document.cookie="username=" + document.loginForm.loginUsername.value
+					
+					
+					
+					window.location = "search-results.html";
+				}
+				else{
+					document.getElementById("ame").innerHTML = getCookie("username") +  "'s Favorites: ";
+					document.getElementById("favoriteresult").innerHTML = this.responseText;
+				}
+			}
+			
+		}
+		xhttp.send();	
+		return false;
+	
+	}
+	function lowrank(){
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("POST", "favoritesservlet?command=lowrank&username=" +getCookie("username"),true);
+		
+		xhttp.onreadystatechange = function(){
+			
+			if(this.readyState == XMLHttpRequest.DONE){
+				if(this.responseText == "success"){
+					//document.cookie="username=" + document.loginForm.loginUsername.value
+					
+					
+					
+					window.location = "search-results.html";
+				}
+				else{
+					document.getElementById("ame").innerHTML = getCookie("username") +  "'s Favorites: ";
+					document.getElementById("favoriteresult").innerHTML = this.responseText;
+				}
+			}
+			
+		}
+		xhttp.send();	
+		return false;
+		
+	}
+	function recent(){
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("POST", "favoritesservlet?command=recent&username=" +getCookie("username"),true);
+		
+		xhttp.onreadystatechange = function(){
+			
+			if(this.readyState == XMLHttpRequest.DONE){
+				if(this.responseText == "success"){
+					//document.cookie="username=" + document.loginForm.loginUsername.value
+					
+					
+					
+					window.location = "search-results.html";
+				}
+				else{
+					document.getElementById("ame").innerHTML = getCookie("username") +  "'s Favorites: ";
+					document.getElementById("favoriteresult").innerHTML = this.responseText;
+				}
+			}
+			
+		}
+		xhttp.send();	
+		return false;
+	
+	}
+	function notrecent(){
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("POST", "favoritesservlet?command=notrecent&username=" +getCookie("username"),true);
+		
+		xhttp.onreadystatechange = function(){
+			
+			if(this.readyState == XMLHttpRequest.DONE){
+				if(this.responseText == "success"){
+					//document.cookie="username=" + document.loginForm.loginUsername.value
+					
+					
+					
+					window.location = "search-results.html";
+				}
+				else{
+					document.getElementById("ame").innerHTML = getCookie("username") +  "'s Favorites: ";
+					document.getElementById("favoriteresult").innerHTML = this.responseText;
+				}
+			}
+			
+		}
+		xhttp.send();	
+		return false;
+	
+	}
+	
+	
+	
+	</script>
+	
+	
+</head>
+
+<body onload="logincheck();getfavorites();">
+	<br>
+	<!-- HEADER-->
+	<header>
+	<div class="container">
+    	<div class="row">
+      		<div class="col-6">
+        	<!-- content for column 1 use class = "form-control" for it to stretch the size of the column -->
+        			<div id="logo">
+        				SalEats!
+        			</div>
+        	</div>
+        	
+        	<div class="col-6" align= "right" id="Menu"> 
+        	<!-- content for column 1 use class = "form-control" for it to stretch the size of the column -->
+        	
+
+        	</div>
+        </div>
+   	</div>
+   	</header>
+   	<br>
+   	<hr>
+
+
+<form name="searchform" onSubmit ="return trySearch()">
+
+	<!-- SEARCH -->
+	<div class="container">
+    	<div class="row">
+    		<!-- Restaurant Name -->
+      		<div class="col-7">
+      		<br>
+        		
+  					<div class="form-group">
+    					<input name="restaurantname" type="text" class="form-control" id="exampleInputEmail1"  placeholder="Restaurant Name">
+  					</div>
+  			
+      		</div>
+      		
+      		<!-- Search button -->
+      		<div class="col-1">
+      		<br>
+  				<button type="submit" name="submit" value="Submit Form" class="btn-block form-controll btn btn-lg search"><i class="fa fa-search"></i></button>
+      		</div>
+      		
+      		<!-- Choice -->
+      		<div class="col-4 ">
+        		<table class ="table borderless table-sm btn form-control">
+        		<tr>
+        			<td><input type="radio" name="choice" value ="bestmatch"/> Best Match</td>
+        			<td><input type="radio" name="choice"value ="reviewcount"/> Review Count</td>
+        		</tr>
+        		
+        		<tr>
+        			<td><input type="radio" name="choice" value ="rating"/> Rating</td>
+        			<td><input type="radio" name="choice" value ="distance"/> Distance</td>
+        		</tr>
+        		</table>
+      		</div>
+    	</div>
+  	</div>
+  
+
+  	<!-- LOCATION -->
+  	<div class="container">
+    <div class="row">
+      <div class="col-4" >
+        <!-- content for column 1 use class = "form-control" for it to stretch the size of the column -->
+        
+        	<input type="number" name="Latitude" step=any class="form-control" placeholder="Latitude" id="curLat">
+        
+      </div>
+      <div class="col-4">
+        <!-- content for column 2 use class = "form-control" for it to stretch the size of the column -->
+        
+         <input type="number" name ="Longitude" step=any class="form-control" placeholder="Longitude" id="curLong">
+      </div>
+      <div class="col-4">
+        <!-- content for column 3 use class = "form-control" for it to stretch the size of the column -->
+        <p class="btn btn-primary form-control" id="myBtn"><i class="fa fa-map-marker"></i> Google Maps (Drop a pin!)</p>
+        <!-- The Modal -->
+      </div>
+
+    </div>
+  </div>
+  	  <div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+	
+    <div id="map" class="modal-body"><button type="button" class="close" data-dismiss="modal">&times;</button></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjYzMivq2F7StzkxQfukKs7MLOM_cDuWg&callback=initMap" async defer></script>
+    	<script>
+    	function initMap() {
+    		var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+    		var mapOptions = {
+    		  zoom: 4,
+    		  center: myLatlng
+    		}
+    		var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+    		// Place a draggable marker on the map
+    		var myMarker = new google.maps.Marker({
+    		    position: myLatlng,
+    		    map: map,
+    		    draggable:true,
+    		    title:"Drag me!"
+    		});
+    		google.maps.event.addListener(myMarker, 'dragend', function(evt){
+    		    document.getElementById("curLat").value = evt.latLng.lat().toFixed(6) ;
+    		    document.getElementById("curLong").value = evt.latLng.lng().toFixed(6);
+
+    		});
+
+    		google.maps.event.addListener(myMarker, 'dragstart', function(evt){
+    		    document.getElementById('current').innerHTML = '<p>Currently dragging marker...</p>';
+    		});
+    	}
+    	
+    	</script>
+  </div>
+  	<script>
+	// Get the modal
+	var modal = document.getElementById("myModal");
+
+	// Get the button that opens the modal
+	var btn = document.getElementById("myBtn");
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks the button, open the modal 
+	btn.onclick = function() {
+  	modal.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+  	modal.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+  	if (event.target == modal) {
+    modal.style.display = "none";
+  	}
+	}
+	</script>
+
+	</div>
+  
+
+</form>
+<div class="container">
+    <div class="row">
+<div id="validateSearch"></div></div></div>
+
+<div class="container">
+    <div class="row">
+		<div  class="col-9">
+<h2 style='color: gray' id="ame"> </h2>
+		</div>
+		
+		<div class="btn-group col-3">
+  <button  type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:#990000;color:white">
+    <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>Sort by
+  </button>
+  <div class="dropdown-menu" id="sort">
+    <a class="dropdown-item" href="#" onclick="atoz()">A to Z</a>
+    <a class="dropdown-item" href="#" onclick="ztoa()">Z to A</a>
+    <a class="dropdown-item" href="#" onclick="toprank()">Highest Ranking</a>
+    <a class="dropdown-item" href="#" onclick="lowrank()">Lowest Ranking</a>
+    <a class="dropdown-item" href="#" onclick="recent()">Most Recent</a>
+    <a class="dropdown-item" href="#" onclick="notrecent()">Least Recent</a>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		
+	</div>
+	</div>
+
+<div class="container">
+    <div class="row">
+		<div id="favoriteresult">
+		</div>
+	</div>
+</div>
+
+
+  	
+</body>
+</html>

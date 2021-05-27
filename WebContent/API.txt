@@ -1,0 +1,7 @@
+AIzaSyBjYzMivq2F7StzkxQfukKs7MLOM_cDuWg
+
+Clietn ID for Login : 108280730482-tba48jnfei3e0h9kanb9o24abgnhsqnq.apps.googleusercontent.com
+Client Secret for loginAPI: ROMmSQxLcbo6kS87BgUdAiy3
+
+
+537065921432-6u4lkpomdblg7a2j70jcle2tsltj7t7p.apps.googleusercontent.com
