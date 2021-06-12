@@ -3,38 +3,42 @@
 
 # Topics Covered
 
-## HTML/CSS
-## Databases/JDC/SQL
-## Java Servlets
-## AJAX
-## JSP
+## HTML/CSS | Databases/JDC/SQL | Java Servlets | AJAX | JSP
 
-Introduction
+## Introduction
+
+
 Just in time! Magnificent job with the successful launch of the SalEats driver scheduling
 system, and as a result you have received special blessings from the director. “Perhaps it’s
 time to do something more modern?” Honestly, it’s not such a bad idea given the amount of
 success you’ve had. Don’t resist the modern call of duty - embrace it.
 This time around, the Council of SAL is looking to expand their product line and make their
 new product more up-to-date and user-friendly.
-Overview
+
+
+## Overview
 Making a web application that builds on the Yelp API. The program will allow users to search for restaurants, add
 them to their list of favorites, and schedule reservations for these restaurants on their
 personal Google calendars. Use a variety of different APIs, as well
 as implement a database to keep track of user information.
-The rest of this document includes mockups of the web pages. 
-Google Sign-in API
+The rest of this document includes mockups of the web pages.
+
+
+## Google Sign-in API
 In addition to allowing the user to create an account on your web app, program will also
 allow users to sign in with their Google account. In other words, users will have two different
 login options, as shown in ​ **Exhibit 3.** ​ You can learn more about the Google Sign-in API here:
 https://developers.google.com/identity/sign-in/web/sign-in​.
 Google Calendar API
+
+
 If users are logged in with their Google credentials, they can also make a reservation to the
 restaurant by adding it as an event on their Google calendar, as seen in ​ **Exhibit 6** ​. More
 information on the Google Calendar API here:
 https://developers.google.com/calendar/overview​.
 
 
-Google Maps API
+## Google Maps API
 When querying a search, users will have to type in the latitude and longitude, or instead use
 the Google Maps API to generate a map overview that can populate coordinates. An
 example of this is shown in ​ Exhibit 2
@@ -42,13 +46,19 @@ example of this is shown in ​ Exhibit 2
 more about the API here:
 https://developers.google.com/maps/documentation/javascript/tutorial​.
 Please keep in mind that you may have to generate API keys for the Google-affiliated APIs,
-so​ _do not start this assignment on the last day!_
-MySQL
+so​ 
+
+
+## MySQL
 In this assignment, you will also need to track user information. You should construct a
 simple MySQL database that stores usernames, passwords, emails, user favorites, etc. for
 each user. You will need to display this data on the Favorites page, shown in ​ **Exhibit 8** ​.
 Home Page
+
+
 **Exhibit 1 Home Page (landing page)**
+
+
 This is the landing page for your web assignment. Users can run a search by entering a
 restaurant name and coordinates, selecting the order of the search results (using the radio
 buttons), and then clicking on the magnifying glass icon. The user can also use the Google
@@ -71,7 +81,7 @@ on the Los Angeles area, the latitude and longitude could be populated with 34.0
 -118.287132 respectively.
 
 
-Login/Signup Page
+## Login/Signup Page
 **Exhibit 3 Login/Signup Page**
 Users can sign up for a new account, or login with a pre-existing account on this page.
 When signing up, the user will enter their information in the required fields (be sure to
@@ -88,7 +98,7 @@ formatted fields. Upon a successful login, the user is redirected back to the Ho
 (​ **Exhibit 1** ​).
 
 
-Search Results Page
+## Search Results Page
 **Exhibit 4 Search Results Page**
 The user arrives at this page after a successful query from the Home Page. Using the
 information from the Yelp API, your program should display the 10 best results based on the
@@ -97,7 +107,7 @@ restaurant, the restaurant name, the restaurant address, and a link to their Yel
 Clicking on the image redirects the user to the Details Page for that restaurant (​ **Exhibit 5** ​).
 
 
-Details Page
+## Details Page
 **Exhibit 5 Details Page**
 This page contains additional details about the restaurant that was selected from the Search
 Results Page. This page should contain the restaurant name, address, same image from the
@@ -127,7 +137,7 @@ styling of your calendar is not exactly the same as the one in the mock up. If a
 are missing information, be sure to print out the appropriate error message.
 
 
-Favorites Page
+## Favorites Page
 **Exhibit 8 Favorites Page**
 The user can access their Favorites Page using the menu bar at the top of each page. The
 favorites are displayed chronologically (most recent first) by default, but the user can change
