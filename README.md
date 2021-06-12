@@ -1,6 +1,8 @@
 
 # SalEats
 
+![alt text](https://github.com/hieu-ai/SalEats/blob/main/Ex1.png?raw=true)
+
 # Topics Covered
 
 ## HTML/CSS | Databases/JDC/SQL | Java Servlets | AJAX | JSP
@@ -78,6 +80,8 @@ Clicking on the logo (SalEats!) should redirect the user to the Home Page as wel
 should apply to all the pages in this assignment.
 
 
+![alt text](https://github.com/hieu-ai/SalEats/blob/main/Ex2.png?raw=true)
+
 **Exhibit 2 Home Page (Google Maps overlay)**
 
 
@@ -89,6 +93,9 @@ on the Los Angeles area, the latitude and longitude could be populated with 34.0
 
 
 ## Login/Signup Page
+
+
+![alt text](https://github.com/hieu-ai/SalEats/blob/main/Ex3.png?raw=true)
 
 
 **Exhibit 3 Login/Signup Page**
@@ -111,6 +118,8 @@ formatted fields. Upon a successful login, the user is redirected back to the Ho
 
 ## Search Results Page
 
+![alt text](https://github.com/hieu-ai/SalEats/blob/main/Ex4.png?raw=true)
+
 
 **Exhibit 4 Search Results Page**
 
@@ -123,6 +132,8 @@ Clicking on the image redirects the user to the Details Page for that restaurant
 
 
 ## Details Page
+
+![alt text](https://github.com/hieu-ai/SalEats/blob/main/Ex5.png?raw=true)
 
 
 **Exhibit 5 Details Page**
@@ -138,6 +149,8 @@ Favorites” depending on whether the restaurant is already in the user’s favo
 Once the button is clicked and the restaurant is added to the favorites list, the text and
 functionality should change without needing to refresh the entire webpage.
 
+![alt text](https://github.com/hieu-ai/SalEats/blob/main/Ex6.png?raw=true)
+
 
 **Exhibit 6 Details Page (Add Reservation)**
 
@@ -151,6 +164,8 @@ reservation is added to the user’s Google Calendar when they click on the “S
 Reservation” button. ​ **Exhibit 7** ​displays what the calendar dropdown should look like when
 the user clicks on the “Date” field.
 
+![alt text](https://github.com/hieu-ai/SalEats/blob/main/Ex7.png?raw=true)
+
 
 **Exhibit 7 Details Page (Calendar)**
 
@@ -161,6 +176,8 @@ are missing information, be sure to print out the appropriate error message.
 
 
 ## Favorites Page
+
+![alt text](https://github.com/hieu-ai/SalEats/blob/main/Ex8.png?raw=true)
 
 
 **Exhibit 8 Favorites Page**
