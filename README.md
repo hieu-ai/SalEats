@@ -56,7 +56,7 @@ each user. You will need to display this data on the Favorites page, shown in â€
 Home Page
 
 
-![alt text](https://github.com/hieu-ai/SalEats/blob/Ex1.png?raw=true)
+![alt text](https://github.com/hieu-ai/SalEats/blob/main/Ex1.png?raw=true)
 
 
 **Exhibit 1 Home Page (landing page)**
