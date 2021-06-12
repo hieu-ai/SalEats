@@ -56,6 +56,9 @@ each user. You will need to display this data on the Favorites page, shown in �
 Home Page
 
 
+![alt text](https://github.com/hieu-ai/SalEats/blob/Ex1.png?raw=true)
+
+
 **Exhibit 1 Home Page (landing page)**
 
 
@@ -73,7 +76,11 @@ the menu bar should instead contain “Home,” “Favorites,” and “Logout.�
 should persist between all pages of this application.
 Clicking on the logo (SalEats!) should redirect the user to the Home Page as well. This
 should apply to all the pages in this assignment.
+
+
 **Exhibit 2 Home Page (Google Maps overlay)**
+
+
 The user arrives at this page after clicking on the Google Maps button from ​ **Exhibit 1** ​. The
 user can click any location on the map, and doing so will populate the latitude and longitude
 fields with the latitude and longitude of the selected location. For example, if the user clicks
@@ -82,7 +89,11 @@ on the Los Angeles area, the latitude and longitude could be populated with 34.0
 
 
 ## Login/Signup Page
+
+
 **Exhibit 3 Login/Signup Page**
+
+
 Users can sign up for a new account, or login with a pre-existing account on this page.
 When signing up, the user will enter their information in the required fields (be sure to
 display an appropriate error message if there are missing or improperly formatted fields).
@@ -99,7 +110,11 @@ formatted fields. Upon a successful login, the user is redirected back to the Ho
 
 
 ## Search Results Page
+
+
 **Exhibit 4 Search Results Page**
+
+
 The user arrives at this page after a successful query from the Home Page. Using the
 information from the Yelp API, your program should display the 10 best results based on the
 search query and sorting option. Each row of information contains an image related to the
@@ -108,7 +123,11 @@ Clicking on the image redirects the user to the Details Page for that restaurant
 
 
 ## Details Page
+
+
 **Exhibit 5 Details Page**
+
+
 This page contains additional details about the restaurant that was selected from the Search
 Results Page. This page should contain the restaurant name, address, same image from the
 Search Results Page, phone number, cuisine type, price (in dollar signs), as well as star
@@ -121,6 +140,8 @@ functionality should change without needing to refresh the entire webpage.
 
 
 **Exhibit 6 Details Page (Add Reservation)**
+
+
 Clicking on the “Add Reservation” button will generate an error message if the user is not
 logged in with their Google account, and no additional effects should occur. If the user ​ _is_
 logged in with the Google account, then the appropriate text fields should display
@@ -132,13 +153,19 @@ the user clicks on the “Date” field.
 
 
 **Exhibit 7 Details Page (Calendar)**
+
+
 The calendar can be generated with the default HTML datepicker, so don’t worry if the
 styling of your calendar is not exactly the same as the one in the mock up. If any of the fields
 are missing information, be sure to print out the appropriate error message.
 
 
 ## Favorites Page
+
+
 **Exhibit 8 Favorites Page**
+
+
 The user can access their Favorites Page using the menu bar at the top of each page. The
 favorites are displayed chronologically (most recent first) by default, but the user can change
 the sorting order by using the “Sort by” dropdown menu on the page. Selecting a new sort
