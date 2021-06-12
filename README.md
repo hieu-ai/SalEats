@@ -4,11 +4,11 @@
 # Topics Covered
 
 ## HTML/CSS
+## Databases/JDC/SQL
+## Java Servlets
+## AJAX
+## JSP
 
-Databases/JDC/SQL
-Java Servlets
-AJAX
-JSP
 Introduction
 Just in time! Magnificent job with the successful launch of the SalEats driver scheduling
 system, and as a result you have received special blessings from the director. “Perhaps it’s
